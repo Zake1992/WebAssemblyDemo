@@ -1,0 +1,41 @@
+<html>
+<head>
+  <script>
+    // Check for wasm support.
+    if (!('WebAssembly' in window)) {
+      alert('you need a browser with wasm support enabled :(');
+    }
+
+    function loadWebAssembly(filename, imports = {}) {
+      return fetch(filename)
+        .then(response => response.arrayBuffer())
+        .then(buffer => {
+          imports.env = imports.env || {}
+          Object.assign(imports.env, {
+            memoryBase: 0,
+            tableBase: 0,
+            __memory_base: 0,
+            __table_base: 0,
+            memory: new WebAssembly.Memory({ initial: 256, maximum: 256 }),
+            table: new WebAssembly.Table({ initial: 0, maximum: 0, element: 'anyfunc' })
+          })
+          return WebAssembly.instantiate(buffer, imports)
+        })
+        .then(result => result.instance)
+    }
+
+    loadWebAssembly('./math.wasm')
+      .then(instance => {
+        const { multiply } = instance.exports
+        var button = document.getElementById('run');
+        button.value = 'Call wasm multiply';
+        button.addEventListener('click', function() {
+          alert('60 * 11 = ' + multiply(60, 11))
+        }, false);
+      })
+  </script>
+</head>
+<body>
+  <input type="button" id="run" value="waiting for WebAssembly..."/>
+</body>
+</html>
