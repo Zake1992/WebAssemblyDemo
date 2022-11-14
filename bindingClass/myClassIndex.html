@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>bindingClass Demo</title>
+</head>
+<body>
+  <!-- <span style="font-size: 50px;">🐶</span> -->
+  <button id="hi">Say hi</button>
+  <button id="bark">Bark (console)</button>
+  <script src="./myClass.js"></script>
+  <script>
+    console.log(Module);
+    Module.addOnPostRun(() => {
+      const myClass = new Module.MyClass(6)
+      hi.onclick = () => alert(Module.MyClass.getNum(myClass))
+    //   bark.onclick = () => dog.makeSound()
+    })
+  </script>
+</body>
+</html>

@@ -1,19 +1,20 @@
-#ifndef MYCLASS_H
-#define MYCLASS_H
+// #ifndef MYCLASS_H
+// #define MYCLASS_H
 
-#include <string>
+// #include <string>
 
-using std::string;
+// using std::string;
 
-class MyClass {
-  // string name;
+// class MyClass {
+//   // string name;
 
-  public:
-    MyClass (string n);
-    void CompareBig(int x, int y);
-    void makeSound ();
-
+//   public:
+//     MyClass (string n);
+//     void CompareBig(int x, int y);
+//     int getNumValue();
+//     void setNum(int num);
+//     static int getNum(MyClass &instance);
   
-};
+// };
 
-#endif
+// #endif
