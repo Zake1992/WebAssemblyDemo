@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>bindingClass Demo</title>
+</head>
+<body>
+  <!-- <span style="font-size: 50px;">🐶</span> -->
+  <!-- <button id="hi">Say hi</button>
+  <button id="bark">Bark (console)</button> -->
+  <script src="./class-test.js"></script>
+  <script>
+    // console.log(Module);
+    // Module.addOnPostRun(() => {
+    //   const myClass = new Module.ClassTest(6)
+    //   hi.onclick = () => alert(Module.ClassTest.getNum(myClass))
+    // //   bark.onclick = () => dog.makeSound()
+    // })
+
+    var instance = new Module.ClassTest(10, "hello");
+    instance.incrementX();
+    instance.x; // 12
+    instance.x = 20; // 20
+    Module.ClassTest.getStringFromInstance(instance); // "hello"
+    instance.delete();
+  </script>
+</body>
+</html>
