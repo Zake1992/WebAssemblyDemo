@@ -1,41 +1,46 @@
 <html>
+
 <head>
   <script>
-    // Check for wasm support.
-    if (!('WebAssembly' in window)) {
-      alert('you need a browser with wasm support enabled :(');
-    }
-
-    function loadWebAssembly(filename, imports = {}) {
-      return fetch(filename)
+    function loadWebAssembly(path, imports = {}) {
+      return fetch(path)
         .then(response => response.arrayBuffer())
-        .then(buffer => {
+        .then(buffer => WebAssembly.compile(buffer))
+        .then(module => {
           imports.env = imports.env || {}
-          Object.assign(imports.env, {
-            memoryBase: 0,
-            tableBase: 0,
-            __memory_base: 0,
-            __table_base: 0,
-            memory: new WebAssembly.Memory({ initial: 256, maximum: 256 }),
-            table: new WebAssembly.Table({ initial: 0, maximum: 0, element: 'anyfunc' })
-          })
-          return WebAssembly.instantiate(buffer, imports)
+
+          // 开辟内存空间
+          imports.env.memoryBase = imports.env.memoryBase || 0
+          if (!imports.env.memory) {
+            imports.env.memory = new WebAssembly.Memory({ initial: 256 })
+          }
+
+          // 创建变量映射表
+          imports.env.tableBase = imports.env.tableBase || 0
+          if (!imports.env.table) {
+            // 在 MVP 版本中 element 只能是 "anyfunc"
+            imports.env.table = new WebAssembly.Table({ initial: 0, element: 'anyfunc' })
+          }
+          // 创建 WebAssembly 实例
+          return new WebAssembly.Instance(module, imports)
         })
-        .then(result => result.instance)
     }
 
     loadWebAssembly('./math.wasm')
       .then(instance => {
-        const { multiply } = instance.exports
-        var button = document.getElementById('run');
-        button.value = 'Call wasm multiply';
-        button.addEventListener('click', function() {
-          alert('60 * 11 = ' + multiply(60, 11))
-        }, false);
-      })
+        //const { add, square } = instance.exports;
+        const add = instance.exports._add;
+        const square = instance.exports._square;
+        // ...
+
+        console.log(add(5, 5));
+        console.log(square(add(5, 5)));
+      });
   </script>
 </head>
+
 <body>
-  <input type="button" id="run" value="waiting for WebAssembly..."/>
+  <input type="button" id="run" value="waiting for WebAssembly..." />
 </body>
+
 </html>
