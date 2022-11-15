@@ -11,8 +11,8 @@
     <script>
       Module = {};
       Module.onRuntimeInitialized = function() {
-        //do sth.
-        Module._main();
+        // Module.main()会提示找不到这个函数
+        Module.main();
       }
     </script>
     <script src="hello.js"></script>
