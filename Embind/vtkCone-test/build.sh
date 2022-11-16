@@ -1,0 +1,1 @@
+emcc --bind vtkCone.cxx  -o vtkCone.js  -s SIDE_MODULE=0 -s LLD_REPORT_UNDEFINED -I/usr/local/include/vtk-9.2/

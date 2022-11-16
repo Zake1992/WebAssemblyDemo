@@ -3,11 +3,9 @@
 
 #include "emscripten/bind.h"
 
-
-// using namespace std; 
+// using namespace std;
 // #include "emscripten/bind.h"
 using namespace emscripten;
-
 
 class ClassTest
 {

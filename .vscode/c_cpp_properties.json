@@ -4,7 +4,9 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/share/emscripten/**"
+                "/usr/share/emscripten/**",
+                "/usr/local/include/vtk-9.2/**",
+                "/home/zhangkun/devtools-repo/VTK-9.2.0-build/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
