@@ -1,0 +1,13 @@
+<script src="callJsGlobalFunc.js"></script>
+<body>
+  <p>the main() of callJsFromC++ well run</p>
+</body>
+<script>
+  function set_background_color(color_idx) {
+    var color = "red";
+    if (color_idx == 1) color = "blue";
+    else if (color_idx == 2) color = "green";
+
+    document.body.style.backgroundColor = color; // set the new background color
+  }
+</script>
