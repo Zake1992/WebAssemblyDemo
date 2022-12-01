@@ -1,0 +1,2 @@
+## 用Emscripten只生成WebAssembly文件
+这种方式中，我们只用Emscripten创建WebAssembly文件，不包含其他任何文件，在这种情况下，我们需要自己创建HTML文件，还要编写下载 和实例化WebAssembly模块的JavaScript代码。
